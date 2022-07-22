@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 
 abstract class Repository {
   static final _dio = Dio(
-    BaseOptions(baseUrl: 'https://rickandmortyapi.com/api'),
+    BaseOptions(
+      baseUrl: 'https://rickandmortyapi.com/api',
+    ),
   );
 
   static Future<PaginatedCharacters> getCharacters() async {
