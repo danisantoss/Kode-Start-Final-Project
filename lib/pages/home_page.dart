@@ -1,5 +1,6 @@
 import 'package:api/pages/components/app_bar_widget.dart';
-import 'package:api/src/data/get_characters.dart';
+import 'package:api/pages/details_page.dart';
+import 'package:api/src/data/get_characters_service.dart';
 import 'package:api/src/models/character.dart';
 import 'package:flutter/material.dart';
 import '../src/theme/app_colors.dart';
@@ -19,12 +20,8 @@ class _MyHomePageState extends State<HomePage> {
   @override
   void initState() {
     characters = CharacterService().getAllCharacters();
+    
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -47,7 +44,13 @@ class _MyHomePageState extends State<HomePage> {
               itemBuilder: (_, index) {
                 final character = dataResults[index];
 
-                return CharacterCard(character: character);
+                return CharacterCard(
+                  character: character,
+                  onTap: () => Navigator.of(context).pushNamed(
+                    DetailsPage.routeId,
+                    arguments: character.id,
+                  ),
+                );
                 // ignore: avoid_unnecessary_containers
               },
               separatorBuilder: (context, index) => const SizedBox(height: 16),
