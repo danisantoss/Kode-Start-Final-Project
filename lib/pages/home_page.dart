@@ -1,9 +1,9 @@
+import 'package:api/pages/components/app_bar_widget.dart';
 import 'package:api/src/data/get_characters.dart';
 import 'package:api/src/models/character.dart';
 import 'package:flutter/material.dart';
-//import '../src/data/repository.dart';
-//import '../src/models/paginated_characters.dart';
 import '../src/theme/app_colors.dart';
+import 'components/character_card.dart';
 
 class HomePage extends StatefulWidget {
   static const routeId = '/';
@@ -30,7 +30,12 @@ class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const AppBarWidget(
+        leftIcon: Icon(
+          Icons.menu,
+          color: AppColors.white,
+        ),
+      ),
       backgroundColor: AppColors.backgroundColor,
       body: FutureBuilder(
         future: characters,
@@ -42,26 +47,7 @@ class _MyHomePageState extends State<HomePage> {
               itemBuilder: (_, index) {
                 final character = dataResults[index];
 
-                return Card(
-                      color: AppColors.primaryLightColor,
-                      clipBehavior: Clip.antiAlias,
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 20, 
-                        vertical: 7.5,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image.network(character.image),
-                          ],
-                        ),
-                      ),
-                    );
+                return CharacterCard(character: character);
                 // ignore: avoid_unnecessary_containers
               },
               separatorBuilder: (context, index) => const SizedBox(height: 16),
