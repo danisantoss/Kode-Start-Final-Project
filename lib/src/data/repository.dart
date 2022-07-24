@@ -1,6 +1,6 @@
-import 'package:api/models/detailed_characters.dart';
-import 'package:api/models/paginated_characters.dart';
 import 'package:dio/dio.dart';
+import '../models/detailed_characters.dart';
+import '../models/paginated_characters.dart';
 
 abstract class Repository {
   static final _dio = Dio(
@@ -10,14 +10,14 @@ abstract class Repository {
   );
 
   static Future<PaginatedCharacters> getCharacters() async {
-    final response = await _dio.get('/character');
+    var response = await _dio.get('/character');
 
     final data = PaginatedCharacters.fromJson(response.data);
     return data;
   }
 
   static Future<DetailedCharacters> getCharacterDetails(int characterId) async {
-    final response = await _dio.get('/character/$characterId');
+    var response = await _dio.get('/character/$characterId');
 
     final data = DetailedCharacters.fromJson(response.data);
 
@@ -25,7 +25,7 @@ abstract class Repository {
   }
 
   static Future<DetailedCharacters> getEpisodeDetails(int episodeId) async {
-    final response = await _dio.get('/episode');
+    var response = await _dio.get('/episode/$episodeId');
 
     final data = DetailedCharacters.fromJson(response.data);
 
