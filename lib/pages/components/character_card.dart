@@ -5,10 +5,12 @@ import '../../src/theme/app_colors.dart';
 class CharacterCard extends StatelessWidget {
   const CharacterCard({
     Key? key,
-    required this.character,
+    required this.character, 
+    this.onTap,
   }) : super(key: key);
 
   final Character character;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CharacterCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

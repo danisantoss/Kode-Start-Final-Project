@@ -15,8 +15,7 @@ abstract class GetEntitiesService {
           Info info = Info.fromJson(dataInfo);
           nextUrl = info.next;
           var dataResults = response.data["results"];
-          allEntities.addAll(
-              List<Map<String, dynamic>>.from(dataResults));
+          allEntities.addAll(List<Map<String, dynamic>>.from(dataResults));
         } catch (e) {
           allEntities.addAll(List<Map<String, dynamic>>.from(response.data));
           nextUrl = null;

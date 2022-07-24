@@ -1,3 +1,4 @@
+import 'package:api/pages/details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'pages/home_page.dart';
@@ -20,8 +21,16 @@ class MyApp extends StatelessWidget {
               builder: (context) {
                 return const HomePage();
               },
+            );    
+          case DetailsPage.routeId:
+            final args = settings.arguments as int;
+            return MaterialPageRoute(
+              builder: (context) {
+                return DetailsPage(
+                  characterId: args,
+                );
+              },
             );
-
           default:
             return null;
         }
