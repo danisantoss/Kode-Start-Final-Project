@@ -20,7 +20,6 @@ class _MyHomePageState extends State<HomePage> {
   @override
   void initState() {
     characters = CharacterService().getAllCharacters();
-    
     super.initState();
   }
 
@@ -46,15 +45,16 @@ class _MyHomePageState extends State<HomePage> {
 
                 return CharacterCard(
                   character: character,
-                  onTap: () => Navigator.of(context).pushNamed(
-                    DetailsPage.routeId,
-                    arguments: character.id,
-                  ),
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      DetailsPage.routeId,
+                      arguments: character,
+                    );
+                  },
                 );
-                // ignore: avoid_unnecessary_containers
               },
               separatorBuilder: (context, index) => const SizedBox(height: 16),
-              itemCount: 900,
+              itemCount: dataResults.length,
             );
           }
           return Container();
