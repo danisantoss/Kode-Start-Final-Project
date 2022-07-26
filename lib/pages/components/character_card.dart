@@ -5,7 +5,7 @@ import '../../src/theme/app_colors.dart';
 class CharacterCard extends StatelessWidget {
   const CharacterCard({
     Key? key,
-    required this.character, 
+    required this.character,
     this.onTap,
   }) : super(key: key);
 
@@ -38,7 +38,7 @@ class CharacterCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,
-                vertical: 12,
+                vertical: 14,
               ),
               child: Text(
                 character.name.toUpperCase(),
