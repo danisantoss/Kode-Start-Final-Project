@@ -1,10 +1,11 @@
-import 'package:api/pages/components/app_bar_widget.dart';
-import 'package:api/pages/details_page.dart';
-import 'package:api/src/data/get_characters_service.dart';
-import 'package:api/src/models/character.dart';
+import 'package:api/pages/components/character_search.dart';
 import 'package:flutter/material.dart';
+import '../src/data/get_characters_service.dart';
+import '../src/models/character.dart';
 import '../src/theme/app_colors.dart';
+import 'components/app_bar_widget.dart';
 import 'components/character_card.dart';
+import 'details_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeId = '/';
@@ -16,6 +17,8 @@ class HomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<HomePage> {
   Future<List<Character>>? characters;
+  List<String> searchTerms = [];
+  List<Character> searchCharacters = [];
 
   @override
   void initState() {
@@ -26,10 +29,18 @@ class _MyHomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(
-        leftIcon: Icon(
-          Icons.menu,
-          color: AppColors.white,
+      appBar: AppBarWidget(
+        leftIcon: InkWell(
+          child: const Icon(
+            Icons.search,
+            color: AppColors.white,
+          ),
+          onTap: () {
+            showSearch(
+              context: context,
+              delegate: CharacterSearchDelegate(searchTerms, searchCharacters),
+            );
+          },
         ),
       ),
       backgroundColor: AppColors.backgroundColor,
@@ -42,6 +53,8 @@ class _MyHomePageState extends State<HomePage> {
             return ListView.separated(
               itemBuilder: (_, index) {
                 final character = dataResults[index];
+                searchTerms.add(character.name);
+                searchCharacters.add(character);
 
                 return CharacterCard(
                   character: character,

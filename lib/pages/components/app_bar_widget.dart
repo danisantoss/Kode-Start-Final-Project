@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import '../../src/theme/app_colors.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({
-    Key? key,
-    required this.leftIcon,
-  }) : super(key: key);
+  const AppBarWidget({Key? key, required this.leftIcon}) : super(key: key);
 
   final Widget leftIcon;
 

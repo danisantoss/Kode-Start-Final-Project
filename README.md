@@ -1,6 +1,6 @@
-# api
+# Kode Start Rick & Morty API
 
-A new Flutter project.
+A simple Flutter project that implements an overview of all Rick and Morty characters and a detailed view with detailed information about them.
 
 ## Getting Started
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../src/models/character.dart';
 import '../../src/theme/app_colors.dart';
 import 'first_seen_widget.dart';
+import 'package:icon_decoration/icon_decoration.dart';
 
 class DetailedCharacterCard extends StatelessWidget {
   const DetailedCharacterCard({
@@ -54,10 +55,18 @@ class DetailedCharacterCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.circle,
-                      size: 8,
-                      color: iconColor(detailedCharacter.status),
+                    DecoratedIcon(
+                      icon: Icon(
+                        Icons.circle,
+                        size: 8,
+                        color: iconColor(detailedCharacter.status),
+                      ),
+                      decoration: const IconDecoration(
+                        border: IconBorder(
+                          color: AppColors.white,
+                          width: 2,
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 8),
                     Text(
@@ -65,7 +74,7 @@ class DetailedCharacterCard extends StatelessWidget {
                       style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 12.5,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
@@ -85,7 +94,7 @@ class DetailedCharacterCard extends StatelessWidget {
                   style: const TextStyle(
                     color: AppColors.white,
                     fontSize: 12.5,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 15),
