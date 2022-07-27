@@ -1,8 +1,7 @@
-import 'package:api/src/data/get_episodes_service.dart';
-import 'package:api/src/models/episode.dart';
 import 'package:flutter/material.dart';
 import '../../src/models/character.dart';
 import '../../src/theme/app_colors.dart';
+import 'first_seen_widget.dart';
 
 class DetailedCharacterCard extends StatelessWidget {
   const DetailedCharacterCard({
@@ -66,7 +65,7 @@ class DetailedCharacterCard extends StatelessWidget {
                       style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 12.5,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w900,
                       ),
                     ),
                   ],
@@ -77,7 +76,7 @@ class DetailedCharacterCard extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.white,
                     fontSize: 12.5,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w100,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -86,7 +85,7 @@ class DetailedCharacterCard extends StatelessWidget {
                   style: const TextStyle(
                     color: AppColors.white,
                     fontSize: 12.5,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -95,11 +94,11 @@ class DetailedCharacterCard extends StatelessWidget {
                   style: TextStyle(
                     color: AppColors.white,
                     fontSize: 12.5,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: FontWeight.w100,
                   ),
                 ),
                 const SizedBox(height: 4),
-                firstSeen(detailedCharacter.episode),
+                FirstSeen(characterEpisodes: detailedCharacter.episode),
               ],
             ),
           ),
@@ -115,50 +114,9 @@ Color iconColor(String status) {
       return AppColors.green;
     case 'Dead':
       return AppColors.red;
-    case 'Unknown':
+    case 'unknown':
       return AppColors.gray;
     default:
       return AppColors.black;
   }
-}
-
-Widget firstSeen(List<String> episodes) {
-  final String firstEpisode = episodes.first;
-
-  final Future<List<Episode>> allEpisodes = EpisodeService().getAllEpisodes();
-
-  FutureBuilder(
-    future: allEpisodes,
-    builder: (_, AsyncSnapshot<List<Episode>> snapshot) {
-      if (snapshot.hasData) {
-        final dataResults = snapshot.data!;
-        return ListView.separated(
-          itemBuilder: (_, index) {
-            final episode = dataResults[index];
-            final String episodeName;
-
-            if (firstEpisode == episode.url) {
-              episodeName = episode.name;
-            } else {
-              episodeName = 'error';
-            }
-
-            return Text(
-              episodeName,
-              style: const TextStyle(
-                color: AppColors.white,
-                fontSize: 12.5,
-                fontWeight: FontWeight.w500,
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => const SizedBox(height: 16),
-          itemCount: dataResults.length,
-        );
-      }
-      return Container();
-    },
-  );
-
-  return Container();
 }
