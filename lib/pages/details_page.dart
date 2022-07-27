@@ -1,8 +1,8 @@
-import 'package:api/pages/components/app_bar_widget.dart';
-import 'package:api/pages/components/detailed_character_card.dart';
-import 'package:api/src/models/character.dart';
 import 'package:flutter/material.dart';
+import '../src/models/character.dart';
 import '../src/theme/app_colors.dart';
+import 'components/app_bar_widget.dart';
+import 'components/detailed_character_card.dart';
 
 class DetailsPage extends StatefulWidget {
   static const routeId = '/details';
