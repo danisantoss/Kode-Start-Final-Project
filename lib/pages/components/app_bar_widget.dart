@@ -34,7 +34,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                           color: AppColors.white,
                           fontSize: 14.5,
                           fontWeight: FontWeight.w400,
-                          letterSpacing: 0.165,
+                          letterSpacing: 2,
                         ),
                       ),
                     ),

@@ -14,7 +14,7 @@ class CharacterSearchDelegate extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        icon: const Icon(Icons.clear),
+        icon: const Icon(Icons.cancel),
       ),
     ];
   }
@@ -33,46 +33,18 @@ class CharacterSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
     for (var characterName in searchTerms) {
-      if (characterName.toLowerCase().contains(query.toLowerCase())) {
+      if (characterName.toLowerCase().contains(query.toLowerCase()) &&
+          !matchQuery.contains(characterName)) {
         matchQuery.add(characterName);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    List<Character> matchCard = [];
-
-    for (var characterName in searchTerms) {
-      if (characterName.toLowerCase().contains(query.toLowerCase()) && 
-      !matchQuery.contains(characterName)) {
-        matchQuery.add(characterName);
-      }
-    }
-
-    for (var characterName in matchQuery) {
-      for (var chSearch in searchCharacters) {
-        if (characterName.toLowerCase().compareTo(chSearch.name.toLowerCase()) == 0) {
-          matchCard.add(chSearch);
-        }
       }
     }
 
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        var resultCharacter = matchCard[index];
+        String result = matchQuery[index];
+        Character resultCharacter = findCharacter(result, searchCharacters);
+
         return ListTile(
           title: Text(result),
           onTap: () {
@@ -81,8 +53,52 @@ class CharacterSearchDelegate extends SearchDelegate {
               arguments: resultCharacter,
             );
           },
+          leading: Image.network(resultCharacter.image),
         );
       },
     );
   }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchQuery = [];
+
+    for (String characterName in searchTerms) {
+      if (characterName.toLowerCase().contains(query.toLowerCase()) &&
+          !matchQuery.contains(characterName)) {
+        matchQuery.add(characterName);
+      }
+    }
+
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        String result = matchQuery[index];
+        Character resultCharacter = findCharacter(result, searchCharacters);
+
+        return ListTile(
+          title: Text(result),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              DetailsPage.routeId,
+              arguments: resultCharacter,
+            );
+          },
+          leading: Image.network(resultCharacter.image),
+        );
+      },
+    );
+  }
+}
+
+Character findCharacter(String result, List<Character> searchCharacters) {
+  Character character = searchCharacters.first;
+
+  for (Character char in searchCharacters) {
+    if (char.name.toLowerCase().compareTo(result.toLowerCase()) == 0) {
+      character = char;
+    }
+  }
+
+  return character;
 }

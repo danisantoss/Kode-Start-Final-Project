@@ -35,10 +35,8 @@ class _FirstSeenState extends State<FirstSeen> {
               itemBuilder: (_, index) {
                 final episode = dataResults[index];
                 final firstEpisodeUrl = widget.characterEpisodes.first;
-                final String episodeName;
 
                 if (firstEpisodeUrl.compareTo(episode.url) == 0) {
-                  episodeName = episode.name;
                   return Text(
                     episode.name,
                     style: const TextStyle(
