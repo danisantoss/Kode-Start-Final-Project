@@ -15,7 +15,7 @@ class DetailedCharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.primaryLightColor,
+      color: AppColors.blue,
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
