@@ -2,7 +2,8 @@ import 'dart:ui';
 
 class AppColors {
   AppColors._();
-
+  
+  static const blue = Color(0xff5d78f0);
   static const primaryDarkColor = Color(0xfff74e00);
   static const primaryLightColor = Color.fromARGB(255, 255, 159, 103);
   static const appBarColor = Color(0xff1c1b1f);
